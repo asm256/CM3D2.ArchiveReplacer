@@ -101,8 +101,10 @@ namespace CM3D2.ArchiveReplacer.Hook
             LogPrint("FileOpen <- " + file_name);
 #endif
             var name = file_name.ToLower();
-            if (locations.ContainsKey(name))
-                return new AFile(locations[name]);
+            string val;
+            locations.TryGetValue(name, out val);
+            if(!string.IsNullOrEmpty(val))
+                return new AFile(val);
             return base.FileOpen(file_name);
         }
         public override string[] GetList(string f_str_path, ListType type)
