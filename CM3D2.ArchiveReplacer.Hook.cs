@@ -72,7 +72,7 @@ namespace CM3D2.ArchiveReplacer.Hook
             path = Path.Combine(System.Environment.CurrentDirectory, "_Data");
         }
         private void LogPrint(object s){
-            Console.WriteLine(string.Format("AchiveReplacer : {0}",s));
+            Console.Write(string.Format("AchiveReplacer : {0}\n",s));
         }
         public override bool IsExistentFile(string file_name)
         {
