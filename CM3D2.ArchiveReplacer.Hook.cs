@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CM3D2.ArchiveReplacer.Hook
 {
@@ -67,9 +68,22 @@ namespace CM3D2.ArchiveReplacer.Hook
     public class HookArchive : FileSystemArchive
     {
         string path;
+        Dictionary<string, string> locations;
         public HookArchive()
         {
             path = Path.Combine(System.Environment.CurrentDirectory, "_Data");
+            //ファイル収集
+            string[] list = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+            locations = new Dictionary<string, string>(list.Length);
+            foreach (string item in list)
+            {
+                string name = Path.GetFileName(item);
+                if (!Regex.IsMatch(name, @"readme.txt", RegexOptions.IgnoreCase))
+                {
+                    //LogPrint(name.ToLower());
+                    locations.Add(name.ToLower(), item);
+                }
+            }
         }
         private void LogPrint(object s){
             Console.Write(string.Format("AchiveReplacer : {0}\n",s));
@@ -86,10 +100,9 @@ namespace CM3D2.ArchiveReplacer.Hook
 #if DEBUG
             LogPrint("FileOpen <- " + file_name);
 #endif
-            string _path = Path.Combine(path, file_name);
-            if(File.Exists(_path)){
-                return new AFile(_path);
-            }
+            var name = file_name.ToLower();
+            if (locations.ContainsKey(name))
+                return new AFile(locations[name]);
             return base.FileOpen(file_name);
         }
         public override string[] GetList(string f_str_path, ListType type)
@@ -100,12 +113,9 @@ namespace CM3D2.ArchiveReplacer.Hook
             string[] list =  base.GetList(f_str_path, type);
             if (type == ListType.AllFile)
             {
-                var ll = Directory.GetFiles(path, "*." + f_str_path);
-                foreach (var item in ll)
-                {
-                    LogPrint(item);
-                    list.Concat(new string[]{ Path.GetFileName(item)});
-                }
+                var ll = from p in locations
+                         where Regex.IsMatch(p.Key,string.Format("\\.{0}$",f_str_path))
+                         select p.Key;
                 return ll.Concat(list).ToArray();
             }
             return list;
