@@ -1,6 +1,6 @@
 /*
  * コンパイルしてReiPatcher\Patchesに置いてください
- * csc /t:library /r:..\ReiPatcher.exe /r:..\mono.cecil.dll /r:..\mono.cecil.rocks.dlll CM3D2.ArchiveReplacer.Patcher.cs
+ * csc /t:library /r:..\ReiPatcher.exe /r:..\mono.cecil.dll /r:..\mono.cecil.rocks.dll CM3D2.ArchiveReplacer.Patcher.cs
  */
 using Mono.Cecil;
 using Mono.Cecil.Cil;
