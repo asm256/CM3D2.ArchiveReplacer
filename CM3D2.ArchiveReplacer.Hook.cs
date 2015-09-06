@@ -1,15 +1,21 @@
 /*
  * コンパイルしてManagedフォルダ内へ置いてください
  * csc /t:library /r:Assembly-CSharp-firstpass.dll CM3D2.ArchiveReplacer.Hook.cs
- * CM3D2_KAIZOU\_Data フォルダ直下にディレクトリ構造無視して、追加・置換したいファイルを置いてください
- *                            ~~~~  ~~~~~~~~~~~~~~~~~~~~
+ * CM3D2_KAIZOU\_Data フォルダに追加・置換したいファイルを置いてください
  */
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+
+[assembly: AssemblyTitle("CM3D2.ArchiveReplacer.Hook")]
+[assembly: AssemblyDescription("FileSystemArchiveのProxyClass")]
+[assembly: AssemblyProduct("CM3D2.ArchiveReplacer")]
+[assembly: AssemblyCopyright("Copyright © asm__ 2015")]
+[assembly: AssemblyVersion("2015.9.6.0")]
 
 namespace CM3D2.ArchiveReplacer.Hook
 {
