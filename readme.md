@@ -48,7 +48,8 @@ CM3D2_KAIZOU\\\_Dataフォルダに入れたいMODを展開する
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://gist.githubusercontent.com/asm256/8f5472657c1675bdc77a/raw/netbuild.ps1'))"
 ```
 4. ReiPatcherへのパスを聞かれるのでPathcher.dllが必要ならば  
-例:
-```C:\\KISS\\CM3D2_KAIZOU\\ReiPatcher\\```  
+例:```
+C:\\KISS\\CM3D2_KAIZOU\\ReiPatcher\\
+```  
 等と入力(要らないならそのままEnter)
 5. フォルダの中にDLLができてるはず
