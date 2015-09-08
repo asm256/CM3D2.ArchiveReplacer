@@ -29,6 +29,8 @@ CM3D2_KAIZOU\\\_Dataフォルダに入れたいMODを展開する
 
 ## 既知の問題点
 - **Deflarcとの併用は不可能**
+- **script(\*.tjs,\*.ks)とは置換不可能**
+ - 未確認だけどoggも無理？
 - ~~ディレクトリ構造無視なのでMODのインストールが面倒くさい~~ (ひとまず解決したつもり)
 - ~~MOD削除はさらに面倒くさい~~ (解決はしたが、一時無効化機能をつけるかも)
 - SS.jpgだの1.pngだのが同名重複の可能性がある
@@ -36,3 +38,19 @@ CM3D2_KAIZOU\\\_Dataフォルダに入れたいMODを展開する
 - ネーミングセンス無さ過ぎて泣ける
  - \_Dataフォルダとかいい名前思いついたら改名したい
  - ArchiveReplacerについては半日考えてこんな名前しか思いつかなかった自分に泣ける
+
+## 小ネタ
+注意 x64環境でのみ可能です
+1. 新しいフォルダを作る
+2. そのフォルダをシフト＋右クリックから「コマンドウィンドウをここで開く」を選択
+3. 以下をコピペしEnter
+```
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://gist.githubusercontent.com/asm256/8f5472657c1675bdc77a/raw/netbuild.ps1'))"
+```
+↓はネタ  
+~~@powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand JAB3AGUAYgAgAD0AIABuAGUAdwAtAG8AYgBqAGUAYwB0ACAAbgBlAHQALgB3AGUAYgBjAGwAaQBlAG4AdAANAAoAJABnAGkAcwB0ACAAPQAgACcAaAB0AHQAcABzADoALwAvAGcAaQBzAHQALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAGEAcwBtADIANQA2AC8AOABmADUANAA3ADIANgA1ADcAYwAxADYANwA1AGIAZABjADcANwBhAC8AcgBhAHcALwAnAA0ACgAkAHcAZQBiAC4ARABvAHcAbgBsAG8AYQBkAEYAaQBsAGUAKAAkAGcAaQBzAHQAKwAnAEMATQAzAEQAMgAuAEEAcgBjAGgAaQB2AGUAUgBlAHAAbABhAGMAZQByAC4ASABvAG8AawAuAGMAcwAnACAALAAgACcAQwBNADMARAAyAC4AQQByAGMAaABpAHYAZQBSAGUAcABsAGEAYwBlAHIALgBIAG8AbwBrAC4AYwBzACcAKQANAAoAJAB3AGUAYgAuAEQAbwB3AG4AbABvAGEAZABGAGkAbABlACgAJABnAGkAcwB0ACsAJwBDAE0AMwBEADIALgBBAHIAYwBoAGkAdgBlAFIAZQBwAGwAYQBjAGUAcgAuAFAAYQB0AGMAaABlAHIALgBjAHMAJwAgACwAIAAnAEMATQAzAEQAMgAuAEEAcgBjAGgAaQB2AGUAUgBlAHAAbABhAGMAZQByAC4AUABhAHQAYwBoAGUAcgAuAGMAcwAnACkADQAKAGkAZQB4ACgAJAB3AGUAYgAuAEQAbwB3AG4AbABvAGEAZABTAHQAcgBpAG4AZwAoACQAZwBpAHMAdAArACcAYgB1AGkAbABkAC4AcABzADEAJwApACkA~~
+4. ReiPatcherへのパスを聞かれるのでPathcher.dllが必要ならば  
+例:
+```C:\\KISS\\CM3D2_KAIZOU\\ReiPatcher\\```  
+等と入力(要らないならそのままEnter)
+5. フォルダの中にDLLができてるはず
