@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 [assembly: AssemblyDescription("FileSystemArchiveのProxyClass")]
 [assembly: AssemblyProduct("CM3D2.ArchiveReplacer")]
 [assembly: AssemblyCopyright("Copyright © asm__ 2015")]
-[assembly: AssemblyVersion("2015.9.6.0")]
+[assembly: AssemblyVersion("2015.9.9.0")]
 
 namespace CM3D2.ArchiveReplacer.Hook
 {
