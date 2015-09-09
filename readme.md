@@ -8,8 +8,7 @@
 - .NET Framework
 
 ## インストール方法
-CM3D2_KAIZOU\\CM3D2x64_Data\\ManagedフォルダにCM3D2.ArchiveReplacer.Hook.dllを置く  
-CM3D2_KAIZOU\\ReiPatcher\\PatchesフォルダにCM3D2.ArchiveReplacer.Patcher.dllを置く  
+https://gist.github.com/asm256/ed75d84a9e89802821f8
 
 ReiPatcherからパッチを当てる
 
@@ -40,14 +39,3 @@ CM3D2_KAIZOU\\\_Dataフォルダに入れたいMODを展開する
 - ネーミングセンス無さ過ぎて泣ける
  - \_Dataフォルダとかいい名前思いついたら改名したい
  - ArchiveReplacerについては半日考えてこんな名前しか思いつかなかった自分に泣ける
-
-## 小ネタ
-注意 x64環境でのみ可能です
-
-1. 新しいフォルダを作る
-2. そのフォルダをシフト＋右クリックから「コマンドウィンドウをここで開く」を選択
-3. 以下をコピペしEnter  
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://gist.githubusercontent.com/asm256/8f5472657c1675bdc77a/raw/netbuild.ps1'))"
-4. ReiPatcherへのパスを聞かれるのでPathcher.dllが必要ならば  
-例: C:\\KISS\\CM3D2_KAIZOU\\ReiPatcher\\  等と入力(要らないならそのままEnter)
-5. フォルダの中にDLLができてるはず
