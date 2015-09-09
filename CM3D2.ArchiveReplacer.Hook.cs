@@ -3,6 +3,10 @@
  * csc /t:library /r:Assembly-CSharp-firstpass.dll CM3D2.ArchiveReplacer.Hook.cs
  * CM3D2_KAIZOU\_Data フォルダに追加・置換したいファイルを置いてください
  */
+// @AB_addarg /r:Assembly-CSharp-firstpass.dll
+// @AB_addarg /lib:%managed%
+// @AB_install %managed%
+
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -2,6 +2,11 @@
  * コンパイルしてReiPatcher\Patchesに置いてください
  * csc /t:library /r:..\ReiPatcher.exe /r:..\mono.cecil.dll /r:..\mono.cecil.rocks.dll CM3D2.ArchiveReplacer.Patcher.cs
  */
+// @AB_addarg /r:mono.cecil.dll
+// @AB_addarg /r:mono.cecil.rocks.dll
+// @AB_addarg /r:ReiPatcher.exe
+// @AB_addarg /lib:%reipatcher%
+// @AB_install %reipatcher%\Patches
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using System;
