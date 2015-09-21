@@ -107,11 +107,14 @@ namespace CM3D2.ArchiveReplacer.Hook {
     public override string[] GetList(string f_str_path , ListType type) {
       DebugLogPrint(string.Format("List <- {0} / {1}" , f_str_path , type));
       string[] list = base.GetList(f_str_path , type);
+      HashSet<string> isuniq = new HashSet<string>();
+      foreach(var item in list)
+        isuniq.Add(Path.GetFileName(item).ToLower());
       if(type == ListType.AllFile) {
         var ll = from p in locations
-                 where Regex.IsMatch(p.Key , string.Format("\\.{0}$" , f_str_path))
+                 where Regex.IsMatch(p.Key , string.Format("\\.{0}$" , f_str_path)) && isuniq.Add(p.Key)
                  select p.Key;
-        return ll.Concat(list).ToArray();
+        return ll.Concat(list).Distinct().ToArray();
       }
       return list;
     }
