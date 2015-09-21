@@ -4,11 +4,13 @@
  * CM3D2_KAIZOU\_Data フォルダに追加・置換したいファイルを置いてください
  */
 // @AB_addarg /r:Assembly-CSharp-firstpass.dll
+// @AB_addarg /r:UnityEngine.dll
 // @AB_addarg /lib:%managed%
 // @AB_install %managed%
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -48,7 +50,6 @@ namespace CM3D2.ArchiveReplacer.Hook {
     }
 
     public override int Seek(int f_unPos , bool absolute_move) {
-
       return (int)fs.Seek(f_unPos , absolute_move ? SeekOrigin.Begin : SeekOrigin.Current);
     }
 
@@ -85,19 +86,17 @@ namespace CM3D2.ArchiveReplacer.Hook {
         }
       }
     }
-    private void LogPrint(object s) {
-      Console.Write(string.Format("AchiveReplacer : {0}\n" , s));
+    //Debugビルド時のみログを出力する
+    [ConditionalAttribute("DEBUG")]
+    private void DebugLogPrint(object s) {
+      UnityEngine.Debug.Log(string.Format("AchiveReplacer : {0}" , s).TrimEnd());
     }
     public override bool IsExistentFile(string file_name) {
-#if DEBUG
-      LogPrint("IsExistentFile <- " + file_name);
-#endif
+      DebugLogPrint("IsExistentFile <- " + file_name);
       return base.IsExistentFile(file_name);
     }
     public override AFileBase FileOpen(string file_name) {
-#if DEBUG
-      LogPrint("FileOpen <- " + file_name);
-#endif
+      DebugLogPrint("FileOpen <- " + file_name);
       var name = file_name.ToLower();
       string val;
       locations.TryGetValue(name , out val);
@@ -106,9 +105,7 @@ namespace CM3D2.ArchiveReplacer.Hook {
       return base.FileOpen(file_name);
     }
     public override string[] GetList(string f_str_path , ListType type) {
-#if DEBUG
-      LogPrint(string.Format("List <- {0} / {1}" , f_str_path , type));
-#endif
+      DebugLogPrint(string.Format("List <- {0} / {1}" , f_str_path , type));
       string[] list = base.GetList(f_str_path , type);
       if(type == ListType.AllFile) {
         var ll = from p in locations
