@@ -75,8 +75,6 @@ namespace CM3D2.ArchiveReplacer.Hook {
       foreach(string item in list) {
         string name = Path.GetFileName(item).ToLower();
         if(!Regex.IsMatch(name , @"readme\.txt$" , RegexOptions.IgnoreCase)) {
-
-          //LogPrint(name.ToLower());
           if(locations.ContainsKey(name)) {
             NDebug.Warning(string.Format("{0}と{1}が干渉しています\n{1}で上書きします" , locations[name] , item));
             locations[name] = item;
