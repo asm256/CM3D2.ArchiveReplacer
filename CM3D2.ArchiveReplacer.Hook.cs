@@ -85,7 +85,7 @@ namespace CM3D2.ArchiveReplacer.Hook {
       }
     }
     //Debugビルド時のみログを出力する
-    [ConditionalAttribute("DEBUG")]
+    [Conditional("DEBUG")]
     private void DebugLogPrint(object s) {
       UnityEngine.Debug.Log(string.Format("AchiveReplacer : {0}" , s).TrimEnd());
     }
