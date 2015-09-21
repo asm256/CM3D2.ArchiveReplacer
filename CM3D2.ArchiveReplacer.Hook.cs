@@ -114,7 +114,7 @@ namespace CM3D2.ArchiveReplacer.Hook {
         var ll = from p in locations
                  where Regex.IsMatch(p.Key , string.Format("\\.{0}$" , f_str_path)) && isuniq.Add(p.Key)
                  select p.Key;
-        return ll.Concat(list).Distinct().ToArray();
+        return ll.Concat(list).ToArray();
       }
       return list;
     }
