@@ -81,7 +81,7 @@ namespace CM3D2.ArchiveReplacer.Hook {
             NDebug.Warning(string.Format("{0}と{1}が干渉しています\n{1}で上書きします" , locations[name] , item));
             locations[name] = item;
           } else {
-            locations.Add(name.ToLower() , item);
+            locations.Add(name , item);
           }
         }
       }
