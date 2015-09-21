@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
 [assembly: AssemblyTitle("CM3D2.ArchiveReplacer.Hook")]
