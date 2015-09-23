@@ -73,7 +73,10 @@ namespace CM3D2.ArchiveReplacer.Hook {
       string[] list = Directory.GetFiles(basePath , "*" , SearchOption.AllDirectories);
       locOpener = PluginSDK.ConvertPluginManager.createFactoryList(list);
     }
-    //Debugビルド時のみログを出力する
+    /// <summary>
+    /// Debugビルド時のみログを出力する
+    /// </summary>
+    /// <param name="s">出力したい情報</param>
     [Conditional("DEBUG")]
     private void DebugLogPrint(object s) {
       UnityEngine.Debug.Log(string.Format("AchiveReplacer : {0}" , s).TrimEnd());
