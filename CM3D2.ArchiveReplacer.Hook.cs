@@ -126,7 +126,18 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
     //とりあえず初期容量8
     static List<PluginPair> catalog = new List<PluginPair>(8);
     static ConvertPluginManager() {
-      PluginSDK.APngFile.Register();
+      var maintypes = Assembly.GetExecutingAssembly().GetTypes();
+      foreach(var klass in maintypes) {
+        foreach(var tag in klass.GetCustomAttributes(true)) {
+          if(tag is ConvertPluginEnumAttribute) {
+            ConvertPluginEnumAttribute mytag = tag as ConvertPluginEnumAttribute;
+            if(mytag.autoRegister) {
+              var register = klass.GetMethod("Register" , BindingFlags.Static | BindingFlags.Public);
+              register.Invoke(null , null);
+            }
+          }
+        }
+      }
     }
     public static void Register(IConvertDescription desc , Func<string , ConvertPluginBase> ctor) {
       var pair = new PluginPair(desc , ctor);
