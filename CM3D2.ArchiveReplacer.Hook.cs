@@ -65,10 +65,10 @@ namespace CM3D2.ArchiveReplacer.Hook {
     }
   }
   public class HookArchive : FileSystemArchive {
-    string path;
     Dictionary<string , Func<PluginSDK.ConvertPluginBase>> locOpener;
+    string basePath;
     public HookArchive() {
-      path = Path.Combine(System.Environment.CurrentDirectory , "_Data");
+      basePath = Path.Combine(System.Environment.CurrentDirectory , "_Data");
       //ファイル収集
       string[] list = Directory.GetFiles(basePath , "*" , SearchOption.AllDirectories);
       locOpener = PluginSDK.ConvertPluginManager.createFactoryList(list);
