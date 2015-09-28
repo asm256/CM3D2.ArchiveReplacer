@@ -126,14 +126,22 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
     //とりあえず初期容量8
     static List<PluginPair> catalog = new List<PluginPair>(8);
     static ConvertPluginManager() {
-      var maintypes = Assembly.GetExecutingAssembly().GetTypes();
-      foreach(var klass in maintypes) {
-        foreach(var tag in klass.GetCustomAttributes(true)) {
-          if(tag is ConvertPluginEnumAttribute) {
-            ConvertPluginEnumAttribute mytag = tag as ConvertPluginEnumAttribute;
-            if(mytag.autoRegister) {
-              var register = klass.GetMethod("Register" , BindingFlags.Static | BindingFlags.Public);
-              register.Invoke(null , null);
+      var plugin_path = Directory.GetFiles("ARPlugin","*.dll");
+      List<Assembly> plugins = new List<Assembly>();
+      plugins.Add(Assembly.GetExecutingAssembly());
+      foreach(var item in plugin_path) {
+        plugins.Add(Assembly.LoadFile(item));
+      }
+      foreach(var plugin in plugins) {
+        var maintypes = plugin.GetTypes();
+        foreach(var klass in maintypes) {
+          foreach(var tag in klass.GetCustomAttributes(true)) {
+            if(tag is ConvertPluginEnumAttribute) {
+              ConvertPluginEnumAttribute mytag = tag as ConvertPluginEnumAttribute;
+              if(mytag.autoRegister) {
+                var register = klass.GetMethod("Register" , BindingFlags.Static | BindingFlags.Public);
+                register.Invoke(null , null);
+              }
             }
           }
         }
