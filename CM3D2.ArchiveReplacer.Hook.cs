@@ -278,7 +278,7 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
     #endregion
   }
   [System.AttributeUsage(AttributeTargets.Class , Inherited = false , AllowMultiple = false)]
-  sealed class ConvertPluginEnumAttribute : Attribute {
+  public sealed class ConvertPluginEnumAttribute : Attribute {
     public bool autoRegister { get; }
 
     public ConvertPluginEnumAttribute(bool autoRegister) {
