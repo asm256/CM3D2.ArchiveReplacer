@@ -149,24 +149,24 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
       foreach(var path in paths) {
         bool found = false;
         // pathのブロックは1st foreachの１つ上なので使い回しされるので保存する
-        var savedpath = path;
-        string name = Path.GetFileName(path).ToLower();
+        var savedpath = path.ToLower();
+        string name = Path.GetFileName(savedpath);
         foreach(var plgin in catalog) {
           var plgindesc = plgin.desc;
-          if(plgindesc.isSrcFile(path)) {
+          if(plgindesc.isSrcFile(savedpath)) {
             string registname = plgindesc.Src2Dst(name);
             result[registname] = () => plgin.ctor(savedpath);
-            chk_samepath[registname] = path;
+            chk_samepath[registname] = savedpath;
             found = true;
             break;
           }
-          if(plgindesc.isDstFile(path)) {
-            if(chk_samepath.ContainsValue(plgindesc.Dst2Src(path)))
+          if(plgindesc.isDstFile(savedpath)) {
+            if(chk_samepath.ContainsValue(plgindesc.Dst2Src(savedpath)))
               continue;
           }
         }
         if(!found) {
-          if(name != "readme.txt") {
+          if(name == "readme.txt") {
             continue;
           }
           string prevpath;
