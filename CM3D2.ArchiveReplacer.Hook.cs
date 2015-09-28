@@ -181,6 +181,7 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
           if(chk_samepath.TryGetValue(name , out prevpath)) {
             UnityEngine.Debug.Log($"{prevpath}が{path}で上書きされます");
           }
+          //UnityEngine.Debug.Log($"{name}=File({savedpath})");
           result[name] = () => new AFile(savedpath);
         }
       }
@@ -189,7 +190,19 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
   }
 
   public class AFile : ConvertPluginBase {
-    public AFile(string path) : base(path) {
+    protected FileStream fs;
+    protected override void Dispose(bool is_release_managed_code) {
+      fs.Dispose();
+      fs = null;
+    }
+    public override bool IsValid() {
+      return fs != null;
+    }
+    public override DLLFile.Data object_data {
+      get { throw new NotImplementedException(); }
+    }
+    public AFile(string path) {
+      fs = File.OpenRead(path);
     }
     public override int Read(ref byte[] f_byBuf , int f_nReadSize) {
       return fs.Read(f_byBuf , 0 , f_nReadSize);
@@ -298,23 +311,6 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
   /// コレに[ConvertPluginEnum(true)]属性付けてください
   /// </summary>
   public abstract class ConvertPluginBase : AFileBase {
-    #region 共通そうなものをまとめておく
-    protected FileStream fs;
-    protected override void Dispose(bool is_release_managed_code) {
-      fs.Dispose();
-      fs = null;
-    }
-    public override bool IsValid() {
-      return fs != null;
-    }
-    public override DLLFile.Data object_data {
-      get { throw new NotImplementedException(); }
-    }
-    public ConvertPluginBase(string path) {
-      fs = File.OpenRead(path);
-    }
-    #endregion
-  }
 
   #region thx 高精細・肌テクスチャの人
   // from http://jbbs.shitaraba.net/bbs/read.cgi/game/55179/1441620833/448-454
