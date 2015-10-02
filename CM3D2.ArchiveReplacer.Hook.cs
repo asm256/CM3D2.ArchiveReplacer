@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 [assembly: AssemblyDescription("FileSystemArchiveのProxyClass")]
 [assembly: AssemblyProduct("CM3D2.ArchiveReplacer")]
 [assembly: AssemblyCopyright("Copyright © asm__ 2015")]
-[assembly: AssemblyVersion("15.9.23.0")]
+[assembly: AssemblyVersion("15.10.3.0")]
 
 namespace CM3D2.ArchiveReplacer.Hook {
   public class AFile : AFileBase {
@@ -83,6 +83,9 @@ namespace CM3D2.ArchiveReplacer.Hook {
     }
     public override bool IsExistentFile(string file_name) {
       DebugLogPrint("IsExistentFile <- " + file_name);
+      var name = file_name.ToLower();
+      if(locOpener.ContainsKey(name))
+        return true;
       return base.IsExistentFile(file_name);
     }
     public override AFileBase FileOpen(string file_name) {
