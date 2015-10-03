@@ -118,6 +118,7 @@ namespace CM3D2.ArchiveReplacer.Hook {
 }
 namespace CM3D2.ArchiveReplacer.PluginSDK {
   public static class ConvertPluginManager {
+    static string PluginBaseDir = "ARPlugin";
     protected struct PluginPair {
       public IConvertDescription desc;
       public Func<string , ConvertPluginBase> ctor;
@@ -129,7 +130,9 @@ namespace CM3D2.ArchiveReplacer.PluginSDK {
     //とりあえず初期容量8
     static List<PluginPair> catalog = new List<PluginPair>(8);
     static ConvertPluginManager() {
-      var plugin_path = Directory.GetFiles("ARPlugin","*.dll");
+      var plugin_path = Directory.Exists(PluginBaseDir) ?
+        Directory.GetFiles(PluginBaseDir , "*.dll")
+        : new string[] { };
       List<Assembly> plugins = new List<Assembly>();
       plugins.Add(Assembly.GetExecutingAssembly());
       foreach(var item in plugin_path) {
